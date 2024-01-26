@@ -121,5 +121,18 @@ docker-compose -f docker-compose.yml up -d
 
 1. Confit git push / force 
     ayant 2 dossier similaire et ayant du beaucoup naviger en bash pour le project cela a mené a des problemes de fichier et a des fichier corrompu.
-    exemple la partie setting a ete complement tronqué et la connextion finis en echec, 
+    exemple la partie setting a ete complement tronqué et la connextion finit en echec, 
     afin de remedia a ce probleme la creation d'un nouvelle environnemeent et le lancement de la procedure entieres or fichier pouvant etre importer a ete fait.
+
+2. UTF 16 / UTF 8
+    attention les fichier en fonction de votre typologie et facon de creer les fichier peut etre encoder en diffferente 
+    forme : soit utf8 ou utf16 
+    cela ma valu plus de 1j de debug sans savoir ce qui ce passait
+
+
+
+pour lancer les partis :
+    1. scrapy : scrapy crawl gpissy 
+    2. flask  : flask --app radomquo.py run
+    3. apres  : redmail est un echec qui fait planter l'application 
+    
