@@ -135,4 +135,11 @@ pour lancer les partis :
     1. scrapy : scrapy crawl gpissy 
     2. flask  : flask --app radomquo.py run
     3. apres  : redmail est un echec qui fait planter l'application 
-    
+
+
+
+API marche avec scrapy  
+dossier json pour le résultat ou directement connecter avec docker image mongodb 
+teste lancer mais avec erreur (2 app une mongo et une json )
+pas de log car bug et grosse session de debug du au UTF 8 et UTF 16 
+redmail non efficace 
