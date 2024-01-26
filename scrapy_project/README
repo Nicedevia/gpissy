@@ -1,0 +1,125 @@
+# Projet de Scraping avec Scrapy et Flask
+
+Ce projet a pour objectif de collecter des citations à partir du site http://quotes.toscrape.com, 
+de stocker ces citations dans une base de données MongoDB avec Scrapy, 
+et de créer un serveur Flask qui affiche une citation aléatoire à chaque visite.
+
+## Configuration de l'environnement
+
+1. Assurez-vous d'avoir Python installé sur votre machine.
+
+2. Créez un environnement virtuel (facultatif mais recommandé) :
+
+    ```bash
+    python -m venv venv
+    ```
+
+3. Activez l'environnement virtuel :
+
+    - Sur Windows :
+
+    ```bash
+    .\venv\Scripts\activate
+    ```
+
+4. Installez les dépendances du projet :
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Phase 1 - Étude approfondie de Scrapy
+
+- Documentation officielle de Scrapy : [https://scrapy.org/](https://scrapy.org/)
+- Tutoriel Scrapy : [https://python.gotrained.com/scrapy-tutorial-web-scraping-craigslist/]
+(https://python.gotrained.com/scrapy-tutorial-web-scraping-craigslist/)
+
+## Phase 2 - Élaboration du Spider
+
+- Exécutez le Spider pour extraire les citations :
+
+    ```bash
+    scrapy crawl quotes
+    ```
+
+## Utilisation de MongoDB via Docker
+
+1. Démarrez le conteneur MongoDB :
+
+    ```bash
+    docker run -d -p 27017:27017 --name mongodb_container mongo
+    ```
+
+2. Obtenez l'adresse IP du conteneur MongoDB :
+
+    ```bash
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mongodb_container
+    ```
+
+    Prenez note de l'adresse IP obtenue.
+
+3. Configurer les paramètres dans `settings.py` :
+
+    ```python
+    # quotes_scraper/settings.py
+
+    MONGODB_URI = 'mongodb://<adresse_ip_du_conteneur>:27017'
+    MONGODB_DB = 'quotes'
+    MONGODB_COLLECTION = 'quotes'
+    MONGODB_ERROR_COLLECTION = 'errors'
+    ```
+
+    Remplacez `<adresse_ip_du_conteneur>` par l'adresse IP obtenue à l'étape précédente.
+
+## Phase 3 - Conservation des données dans MongoDB
+
+- Assurez-vous d'avoir MongoDB installé et en cours d'exécution sur votre machine.
+
+- Exécutez à nouveau le Spider pour stocker les citations dans MongoDB :
+
+    ```bash
+    scrapy crawl quotes
+    ```
+
+## Phase 4 - Création d'un serveur Flask
+
+- Le serveur Flask est conçu pour afficher une citation aléatoire à chaque visite.
+
+- Assurez-vous d'avoir MongoDB en cours d'exécution pour que le serveur puisse accéder à la base de données.
+
+- Exécutez le serveur Flask :
+
+    ```bash
+    python app.py
+    ```
+
+- Ouvrez votre navigateur et accédez à [http://127.0.0.1:5000/](http://127.0.0.1:5000/) pour voir une citation aléatoire.
+
+## Phase 5 - Synchronisation/Stabilisation
+
+- Le Spider est configuré pour éviter les doublons lors de la mise à jour de la base de données.
+
+- Les erreurs sont enregistrées dans une collection dédiée dans MongoDB pour le monitoring.
+
+    - En cas de besoin, consultez la collection d'erreurs dans MongoDB :
+
+        ```bash
+        # Accédez à la console MongoDB
+        mongo
+
+        # Utilisez la base de données et consultez la collection d erreurs
+        use quotes
+        db.errors.find()
+        ```
+
+---
+## pour le docker le lancement 
+docker context create compose
+docker-compose -f docker-compose.yml up -d
+
+## probleme rencontré : 
+
+1. Confit git push / force 
+    ayant 2 dossier similaire et ayant du beaucoup naviger en bash pour le project cela a mené a des problemes de fichier et a des fichier corrompu.
+    exemple la partie setting a ete complement tronqué et la connextion finis en echec, 
+    afin de remedia a ce probleme la creation d'un nouvelle environnemeent et le lancement de la procedure entieres or fichier pouvant etre importer a ete fait.
