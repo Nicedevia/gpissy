@@ -1,10 +1,123 @@
-<html>
-    <head>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .background-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #000;
+            border-radius: 1px;
+            opacity: 0.1;
+        }
+
+        .line:nth-child(1) { top: 10%; transform: rotate(15deg); }
+        .line:nth-child(2) { top: 20%; transform: rotate(30deg); }
+        .line:nth-child(3) { top: 30%; transform: rotate(45deg); }
+        .line:nth-child(4) { top: 40%; transform: rotate(60deg); }
+        .line:nth-child(5) { top: 50%; transform: rotate(75deg); }
+        .line:nth-child(6) { top: 60%; transform: rotate(90deg); }
+        .line:nth-child(7) { top: 70%; transform: rotate(105deg); }
+        .line:nth-child(8) { top: 80%; transform: rotate(120deg); }
+        .line:nth-child(9) { top: 90%; transform: rotate(135deg); }
+        .line:nth-child(10) { bottom: 10%; transform: rotate(150deg); }
+
+        .quote-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #f8f4e9; /* Couleur beige */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote {
+            font-size: 18px;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            display: block;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .text {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .generate-button {
+            background-color: #e0f7fa; /* Couleur bleu turquoise clair */
+            color: #333;
+            border: 1px solid #b3e0f4; /* Contour en bleu turquoise */
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .generate-button:hover {
+            background-color: #b3e0f4; /* Surbrillance en bleu turquoise */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <div class="quote-container">
         <p class="quote">{{ item.quote }}</p>
         <span class="author">{{ item.author }}</span>
-        <span class="text">" tout ça grâce l'araigner gpissy"</span>
-        
-    </body>
+        <span class="text">"tout ça grâce à l'araignée gpissy"</span>
+        <button class="generate-button" onclick="generateQuote()">Générer une autre citation</button>
+    </div>
+
+    <script>
+        function generateQuote() {
+            // Logique pour générer une nouvelle citation
+            alert("Nouvelle citation générée !");
+        }
+    </script>
+</body>
 </html>
